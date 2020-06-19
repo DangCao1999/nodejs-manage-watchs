@@ -17,10 +17,11 @@ app.post('/watch', async(req, res)=>{
     let data = {
         name: req.body.name,
         amount: req.body.amount,
-        photo: req.body.photo,
+        photoURL: req.body.photoURL,
         price: req.body.price,
         sex: req.body.sex,
     }
+    console.log("post")
     let query = await db.collection("Watchs").doc().set(data).then(()=>{
         res.status(200).send("Ok Done");
     }).catch(()=>{
