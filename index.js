@@ -41,9 +41,9 @@ app.post('/watch', async(req, res)=>{
     }
     console.log(req.body)
     let query = await db.collection("Watchs").doc().set(data).then(()=>{
-        res.status(200).send("Ok Done");
+        res.status(200).send({mess : "Ok Done"});
     }).catch(()=>{
-        res.status(400).send("Oh no!!!");
+        res.status(400).send( {mess : "Oh no!!!"});
     });
   
 })
@@ -63,12 +63,12 @@ app.put('/watch', async (req, res)=>{
         if(!snapshot.exists)
         {
             console.log("khong ton tai");
-            res.status(400).send("Oh no!!!");
+            res.status(400).send({mess : "Oh no!!!"});
         }
         else{
             console.log("ton tai");
             query.set(data).then(()=>{
-                res.status(200).send("Ok Done");
+                res.status(200).send({mess : "Ok Done"});
             });
         }
     })
@@ -77,9 +77,9 @@ app.put('/watch', async (req, res)=>{
 app.delete('/watch', async (req, res)=>{
     let id = req.body.id;
     let query = await db.collection("Watchs").doc(id).delete().then(()=>{
-        res.status(200).send("Ok Done");
+        res.status(200).send({mess : "Ok Done"});
     }).catch(()=>{
-        res.status(400).send("Oh no!!!");
+        res.status(400).send({mess : "Oh no!!!"});
     })
 })
 
