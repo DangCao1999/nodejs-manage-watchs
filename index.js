@@ -74,7 +74,8 @@ app.put('/watch', async (req, res)=>{
     })
 })
 
-app.delete('/watch', async (req, res)=>{
+app.patch('/watch', async (req, res)=>{
+    //console.log(req.body);
     let id = req.body.id;
     let query = await db.collection("Watchs").doc(id).delete().then(()=>{
         res.status(200).send({mess : "Ok Done"});
