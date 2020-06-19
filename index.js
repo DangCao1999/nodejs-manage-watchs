@@ -11,6 +11,24 @@ admin.initializeApp({
 var db = admin.firestore();
 app.use(bodyParser.json());
 
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 
 app.post('/watch', async(req, res)=>{
     //let id = req.body.id;
@@ -21,7 +39,7 @@ app.post('/watch', async(req, res)=>{
         price: req.body.price,
         sex: req.body.sex,
     }
-    console.log("post")
+    console.log(req.body)
     let query = await db.collection("Watchs").doc().set(data).then(()=>{
         res.status(200).send("Ok Done");
     }).catch(()=>{
