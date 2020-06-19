@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 
 app.post('/watch', async(req, res)=>{
-    let id = req.body.id;
+    //let id = req.body.id;
     let data = {
         name: req.body.name,
         amount: req.body.amount,
@@ -21,7 +21,7 @@ app.post('/watch', async(req, res)=>{
         price: req.body.price,
         sex: req.body.sex,
     }
-    let query = await db.collection("Watchs").doc(id).set(data).then(()=>{
+    let query = await db.collection("Watchs").doc().set(data).then(()=>{
         res.status(200).send("Ok Done");
     }).catch(()=>{
         res.status(400).send("Oh no!!!");
