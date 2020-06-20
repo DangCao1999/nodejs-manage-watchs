@@ -49,11 +49,12 @@ app.post('/watch', async(req, res)=>{
 })
 
 app.put('/watch', async (req, res)=>{
+    console.log(req.body)
     let id = req.body.id;
     let data = {
         name: req.body.name,
         amount: req.body.amount,
-        photo: req.body.photo,
+        photoURL: req.body.photoURL,
         price: req.body.price,
         sex: req.body.sex,
     };
