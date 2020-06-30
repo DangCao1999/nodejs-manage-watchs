@@ -9,6 +9,7 @@ admin.initializeApp({
     databaseURL: "https://manage-watch-sales.firebaseio.com"
 });
 var db = admin.firestore();
+var auth = admin.auth();
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
@@ -85,6 +86,25 @@ app.patch('/watch', async (req, res)=>{
     })
 })
 
+
+app.post('/user', async (req, res)=>{
+   
+    let email = req.body.email;
+    let pass  = req.body.pass;
+    let displayName = req.body.displayName;
+    let authen = auth.createUser({
+        email: email,
+        password: pass,
+        displayName: displayName
+    }).then((user)=>{
+        console.log(user);
+        res.status(201).send({mess: "OK Done"});
+    }).catch(()=>{
+        res.status(409).send({mess: "Oh no!!!"});
+    })
+   
+    
+})
 // db.collection('Watchs').doc('5XGEpMDtvb3KmGNLwKns').get().then((data)=>{console.log(data.data())})
 
 app.listen(PORT, ()=>{console.log("listen in port", PORT)})
